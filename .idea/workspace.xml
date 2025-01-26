@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db4072da-55c5-47c8-bdda-513924f8bf9c" name="Changes" comment="commit">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/zohar- part3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/FakeNewsDetectionAI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FakeNewsDetectionAI.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,12 +31,12 @@
     &quot;assignee&quot;: &quot;vaisberger&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/vaisberger/FakeNewsDetectionAI.git",
-    "accountId": "3f6f8b8f-7d1d-46b7-b7e5-5b1f79f567d7"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/vaisberger/FakeNewsDetectionAI.git&quot;,
+    &quot;accountId&quot;: &quot;dfae4dde-b6b4-4d7e-9be1-182940780b82&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
