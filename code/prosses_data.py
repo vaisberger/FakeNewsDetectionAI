@@ -6,8 +6,10 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 import nltk
+from nltk.stem import SnowballStemmer
 import zipfile
 import io
+import nltk
 
 # Download necessary NLTK data
 nltk.download('stopwords')
@@ -16,7 +18,7 @@ nltk.data.clear_cache()
 
 # Initialize stopwords and lemmatizer
 stop_words = set(stopwords.words('english'))
-lemmatizer = WordNetLemmatizer()
+stemmer = SnowballStemmer('english')
 
 def clean_text(text):
     """
@@ -25,62 +27,63 @@ def clean_text(text):
     - Removing URLs, HTML tags, punctuation, numbers
     - Tokenizing
     - Removing stopwords
-    - Lemmatizing
     """
     if pd.isnull(text):  # Handle NaN values
         return ""
+    # Convert to lowercase
     text = text.lower()
-    text = re.sub(r'https?://\S+|www\.\S+', '', text)  # Remove URLs
-    text = re.sub(r'<.*?>', '', text)  # Remove HTML tags
-    text = re.sub(f"[{re.escape(string.punctuation)}]", '', text)  # Remove punctuation
-    text = re.sub(r'\w*\d\w*', '', text)  # Remove digits and words with digits
-    text = re.sub(r'\s+', ' ', text).strip()  # Remove extra whitespace
-    tokens = word_tokenize(text)
-    tokens = [lemmatizer.lemmatize(word) for word in tokens if word not in stop_words]
-    return ' '.join(tokens)
 
-# Path to the ZIP file
-zip_path = r'C:\Users\wisbr\FakeNewsDetectionAI\data\Dataset_news.zip'
+    # Remove URLs
+    text = re.sub(r'https?://\S+|www\.\S+', '', text)
 
-# Open the ZIP file
-with zipfile.ZipFile(zip_path, 'r') as z:
-    # Extract the first file name in the ZIP
-    file_name = z.namelist()[0]
-    print(f"Reading file: {file_name}")
+    # Remove content inside square brackets
+    text = re.sub(r'\[.*?\]', '', text)
 
-    # Detect encoding using a sample
-    with z.open(file_name) as f:
-        sample = f.read(10000)  # Read a sample to detect encoding
-        encoding = chardet.detect(sample)['encoding']
-        print(f"Detected file encoding: {encoding}")
+    # Remove HTML tags
+    text = re.sub(r'<.*?>', '', text)
 
-    # Read the entire file into memory and decode it
-    with z.open(file_name) as f:
-        decoded_file = f.read().decode(encoding, errors='replace')  # Decode the file
+    # Replace all non-word characters with a space
+    text = re.sub(r'\W', ' ', text)
 
-    # Use StringIO to create a file-like buffer for Pandas
-    cleaned_chunks = []
-    buffer = io.StringIO(decoded_file)
-    for chunk in pd.read_csv(buffer, chunksize=10000):
-        # Rename column if the ID column is labeled as 0
-        if '0' in chunk.columns:
-            chunk.rename(columns={'0': 'id'}, inplace=True)
+    # Remove punctuation (we will keep spaces, as they are word boundaries)
+    text = re.sub(f"[{re.escape(string.punctuation)}]", '', text)
 
-        # Clean the text and title columns
-        chunk['cleaned_text'] = chunk['text'].apply(clean_text)
-        chunk['cleaned_title'] = chunk['title'].apply(clean_text)
+    # Remove words with digits
+    text = re.sub(r'\w*\d\w*', '', text)
 
-        # Append cleaned chunk
-        cleaned_chunks.append(chunk)
+    # Collapse multiple spaces into one and strip leading/trailing spaces
+    text = re.sub(r'\s+', ' ', text).strip()
 
-    # Combine all chunks into a single DataFrame
-    cleaned_df = pd.concat(cleaned_chunks, ignore_index=True)
+    tokens = nltk.word_tokenize(text)
+
+    # Stem each token using the SnowballStemmer
+    stemmed_tokens = [stemmer.stem(token) for token in tokens]
+
+    return ' '.join(stemmed_tokens)
+
+# Path to the files
+true = pd.read_csv('C:/Users/wisbr/FakeNewsDetectionAI/data/true.csv')
+fake = pd.read_csv('C:/Users/wisbr/FakeNewsDetectionAI/data/fake.csv')
+
+true['label'] = 1
+fake['label'] = 0
+
+true = true.drop_duplicates()
+fake = fake.drop_duplicates()
+
+data=pd.concat([fake,true],axis=0)
+
+data['title']=data['title'].astype(str)
+data['text']=data['text'].astype(str)
 
 # Save the cleaned DataFrame to a CSV file
+data['title']=data['title'].apply(clean_text)
+data['text']=data['text'].apply(clean_text)
 
-output_path = r'C:\Users\wisbr\FakeNewsDetectionAI\data\Cleaned_Dataset_news.csv'
+data.insert(0, 'id', range(1, len(data) + 1))
+output_path = r'C:\Users\wisbr\FakeNewsDetectionAI\data\Cleaned_Dataset.csv'
 # Use encoding="utf-8-sig" for better compatibility
-cleaned_df.to_csv(output_path, index=False, encoding='utf-8-sig')
+data.to_csv(output_path, index=False, encoding='utf-8-sig')
 print(f"Cleaned data saved to {output_path} with UTF-8 encoding")# UTF-8 with BOM
 
 

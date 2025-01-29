@@ -8,12 +8,12 @@ import chardet
 import io
 
 
-def prepare_data(zip_path, test_size=0.25, random_state=42, max_features=500, ngram_range=(1, 2), min_df=0.01):
+def prepare_data(file_path, test_size=0.25, random_state=42, max_features=100000, ngram_range=(1, 3), min_df=0.01):
     """
     Process the dataset and return TF-IDF vectors for training and testing.
 
     Parameters:
-        zip_path (str): Path to the ZIP file containing the cleaned dataset.
+        file_path (str): Path to the ZIP file containing the cleaned dataset.
         test_size (float): Proportion of the data to be used for testing.
         random_state (int): Random state for reproducibility.
         max_features (int): Maximum number of features for TF-IDF.
@@ -26,34 +26,21 @@ def prepare_data(zip_path, test_size=0.25, random_state=42, max_features=500, ng
         y_train (Series): Training labels.
         y_test (Series): Testing labels.
     """
-    # Extract and read the cleaned dataset
-    with zipfile.ZipFile(zip_path, 'r') as z:
-        file_name = z.namelist()[0]
-        print(f"Reading file: {file_name}")
 
-        # Detect encoding using a sample
-        with z.open(file_name) as f:
-            sample = f.read(10000)  # Read a sample to detect encoding
-            encoding = chardet.detect(sample)['encoding']
-            print(f"Detected file encoding: {encoding}")
+    cleaned_df = pd.read_csv(file_path)
 
-        # Read the entire file into memory and decode it
-        with z.open(file_name) as f:
-            decoded_file = f.read().decode(encoding, errors='replace')  # Decode the file
-
-        # Convert the decoded file string to a DataFrame
-        cleaned_df = pd.read_csv(io.StringIO(decoded_file))
 
     # Ensure rows with missing or empty 'cleaned_text' or 'cleaned_title' are removed
-    cleaned_df = cleaned_df.dropna(subset=['cleaned_text', 'cleaned_title', 'lable'])  # Drop rows with NaNs
+    cleaned_df = cleaned_df.dropna(subset=['text', 'title', 'label'])  # Drop rows with NaNs
     cleaned_df = cleaned_df[
-        (cleaned_df['cleaned_text'].str.strip() != '') &
-        (cleaned_df['cleaned_title'].str.strip() != '')
+        (cleaned_df['text'].str.strip() != '') &
+        (cleaned_df['title'].str.strip() != '')
     ]
 
     # Extract features and labels
-    x = cleaned_df['cleaned_text']
-    y = cleaned_df['lable']
+    x = cleaned_df['text']
+    y = cleaned_df['label']
+
 
     # Split data into training and testing sets
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=random_state)
