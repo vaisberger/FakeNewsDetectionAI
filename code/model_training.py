@@ -1,6 +1,10 @@
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from xgboost import DMatrix, train
 from xgboost import callback as xgb_callback
+import joblib
+from sklearn.svm import LinearSVC
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report
 
 
 def train_random_forest(X_train, y_train):
@@ -57,22 +61,24 @@ def train_xgboost(X_train, y_train, X_test, y_test):
     return xgb_model
 
 
-def train_gradient_boosting(X_train, y_train, X_test, y_test):
+def train_svm(X_train, y_train, X_test, y_test):
     """
-    Train a Gradient Boosting Classifier.
+    Train an SVM model using LinearSVC, scale the data, evaluate performance, and save the model.
+
+    Parameters:
+        X_train (sparse matrix or DataFrame): Training features.
+        y_train (Series or array): Training labels.
+        X_test (sparse matrix or DataFrame): Testing features.
+        y_test (Series or array): Testing labels.
     """
-    # Initialize the Gradient Boosting model
-    gb_model = GradientBoostingClassifier(random_state=0)
+    # Use StandardScaler with with_mean=False for sparse matrices
+    scaler = StandardScaler(with_mean=False)
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
 
-    # Train the Gradient Boosting model
-    gb_model.fit(X_train, y_train)
-
-    # Predict using the trained Gradient Boosting model
-    pred_gb = gb_model.predict(X_test)
-
-    return gb_model, pred_gb
-
-
-
+    # Create and train SVM model
+    model = LinearSVC(C=0.5, max_iter=8000)
+    model.fit(X_train_scaled, y_train)
+    return model, X_test_scaled
 
 
