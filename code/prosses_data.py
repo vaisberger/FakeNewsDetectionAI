@@ -1,17 +1,10 @@
-import chardet
 import pandas as pd
 import re
 import string
 from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-from nltk.tokenize import word_tokenize
-import nltk
 from nltk.stem import SnowballStemmer
-import zipfile
-import io
 import nltk
 
-# Download necessary NLTK data
 nltk.download('stopwords')
 nltk.download('punkt')  # Download punkt tokenizer
 nltk.data.clear_cache()
@@ -30,26 +23,20 @@ def clean_text(text):
     """
     if pd.isnull(text):  # Handle NaN values
         return ""
-    # Convert to lowercase
-    text = text.lower()
 
-    # Remove URLs
-    text = re.sub(r'https?://\S+|www\.\S+', '', text)
+    text = text.lower()   # Convert to lowercase
 
-    # Remove content inside square brackets
-    text = re.sub(r'\[.*?\]', '', text)
+    text = re.sub(r'https?://\S+|www\.\S+', '', text)  # Remove URLs
 
-    # Remove HTML tags
-    text = re.sub(r'<.*?>', '', text)
+    text = re.sub(r'\[.*?\]', '', text)   # Remove content inside square brackets
 
-    # Replace all non-word characters with a space
-    text = re.sub(r'\W', ' ', text)
+    text = re.sub(r'<.*?>', '', text)  # Remove HTML tags
 
-    # Remove punctuation (we will keep spaces, as they are word boundaries)
-    text = re.sub(f"[{re.escape(string.punctuation)}]", '', text)
+    text = re.sub(r'\W', ' ', text)  # Replace all non-word characters with a space
 
-    # Remove words with digits
-    text = re.sub(r'\w*\d\w*', '', text)
+    text = re.sub(f"[{re.escape(string.punctuation)}]", '', text)  # Remove punctuation
+
+    text = re.sub(r'\w*\d\w*', '', text) # Remove words with digits
 
     # Collapse multiple spaces into one and strip leading/trailing spaces
     text = re.sub(r'\s+', ' ', text).strip()

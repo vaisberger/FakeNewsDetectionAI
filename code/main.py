@@ -69,8 +69,13 @@ def main():
 
     # Data preparation
     logging.info("Preparing data...")
-    X_train, X_test, y_train, y_test = prepare_data(zip_path)
+    X_train, X_test, y_train, y_test, manual_check_df = prepare_data(zip_path)  # ✅ Capture manual_check_df
     logging.info("Data preparation completed.")
+
+    # Save manual check data
+    manual_check_path = r"C:\Users\wisbr\FakeNewsDetectionAI\data\Manual_Check_Data.csv"
+    manual_check_df[['text', 'label']].to_csv(manual_check_path, index=False)
+    logging.info(f"Manual check data saved to {manual_check_path}")
 
     # Train Random Forest
     logging.info("Training Random Forest...")
@@ -101,12 +106,12 @@ def main():
     logging.info("Saving models...")
     joblib.dump(rf_model, "random_forest_model2.pkl")
     joblib.dump(xgb_model, "xgboost_model2.pkl")
-    joblib.dump(gb_model, "gradient_boosting_model.pkl")  # Save Gradient Boosting model
+    joblib.dump(gb_model, "gradient_boosting_model.pkl")
     logging.info("Models saved successfully.")
-
 
 if __name__ == "__main__":
     main()
+
 
 
 
