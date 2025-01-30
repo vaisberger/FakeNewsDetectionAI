@@ -9,7 +9,9 @@ from scipy.special import expit
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
+from flask import Flask, render_template, request
 
+app = Flask(__name__)
 # Download necessary NLTK resources
 nltk.download('punkt')
 
@@ -139,7 +141,15 @@ def main():
     # Evaluate model on unseen dataset
     evaluate_on_new_dataset(selected_model, vectorizer, dataset_path)
 
+@app.route("/", methods=["GET", "POST"])
+def index():
+    result = None
+    if request.method == "POST":
+        user_text = request.form.get("text")
+        result = predict_with_model(load_model(user_text),load_vectorizer(user_text),user_text)
+    return render_template("index.html", result=result)
+
 
 if __name__ == "__main__":
     main()
-
+app.run(debug=True)
