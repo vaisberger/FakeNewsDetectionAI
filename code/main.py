@@ -89,9 +89,9 @@ def main():
 
     # Save models
     logging.info("Saving models...")
-    joblib.dump(rf_model, "random_forest_model2.pkl")
-    joblib.dump(xgb_model, "xgboost_model2.pkl")
-    joblib.dump(svm_model, "svm_model.pkl")
+    joblib.dump(rf_model, "random_forest_model1.pkl")
+    joblib.dump(xgb_model, "xgboost_model1.pkl")
+    joblib.dump(svm_model, "svm_model1.pkl")
     logging.info("All models saved successfully.")
 
 if __name__ == "__main__":

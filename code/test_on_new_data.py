@@ -174,8 +174,8 @@ def train_and_evaluate_new_data(new_data_path, save_dir):
 
     # Save models
     logging.info("Saving models...")
-    joblib.dump(rf_model, os.path.join(save_dir, "random_forest_model2.pkl"))
-    joblib.dump(xgb_model, os.path.join(save_dir, "xgboost_model2.pkl"))
+    joblib.dump(rf_model, os.path.join(save_dir, "random_forest_model1.pkl"))
+    joblib.dump(xgb_model, os.path.join(save_dir, "xgboost_model1.pkl"))
     joblib.dump(svm_model, os.path.join(save_dir,"svm_model2.pkl"))
     logging.info("Models saved successfully.")
 

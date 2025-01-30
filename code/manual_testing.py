@@ -83,9 +83,9 @@ def main():
     Main function to load models, vectorizer, and perform manual testing.
     """
     # File paths
-    vectorizer_path = "vectorizer.pkl"  # Path to the saved vectorizer
-    rf_model_path = "random_forest_model2.pkl"  # Path to the saved model
-    xgb_model_path = "xgboost_model2.pkl"  # Path to the saved XGBoost model
+    vectorizer_path = "vectorizer1.pkl"  # Path to the saved vectorizer
+    rf_model_path = "random_forest_model1.pkl"  # Path to the saved model
+    xgb_model_path = "xgboost_model1.pkl"  # Path to the saved XGBoost model
 
     # Load models
     rf_model = load_model(rf_model_path)

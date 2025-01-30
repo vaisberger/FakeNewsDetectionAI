@@ -113,9 +113,9 @@ def main():
     """
 
     # Paths to your saved model and vectorizer
-    vectorizer_path = "vectorizer.pkl"
-    xgb_model_path = "xgboost_model2.pkl"
-    rf_model_path = "random_forest_model2.pkl"
+    vectorizer_path = "vectorizer1.pkl"
+    xgb_model_path = "xgboost_model1.pkl"
+    rf_model_path = "random_forest_model1.pkl"
     dataset_path = "C:/Users/wisbr/FakeNewsDetectionAI/data/new_dataset.csv"  # Your unseen dataset
 
     # Load model and vectorizer

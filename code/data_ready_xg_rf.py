@@ -47,7 +47,7 @@ def prepare_data(file_path, test_size=0.25, random_state=42, max_features=100000
     xv_test = vectorizer.transform(x_test)
 
     # Save the trained vectorizer
-    vectorizer_path = r"/code/vectorizer.pkl"
+    vectorizer_path = r"/code/vectorizer1.pkl"
     joblib.dump(vectorizer, vectorizer_path)
     print(f"TF-IDF vectorizer saved to {vectorizer_path}")
 
