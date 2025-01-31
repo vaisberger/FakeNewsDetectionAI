@@ -49,10 +49,10 @@ xgb_model1_path = "../code/xgboost_model1.pkl"
 rf_model1_path = "../code/random_forest_model1.pkl"
 svm_model1_path = "../code/svm_model1.pkl"
 
-vectorizer2_path = "../trained_models/vectorizer2.pkl"
-xgb_model2_path = "../trained_models/xgboost_model2.pkl"
-rf_model2_path = "../trained_models/random_forest_model2.pkl"
-svm_model2_path = "../trained_models/svm_model2.pkl"
+vectorizer2_path = "../new_data_training/vectorizer2.pkl"
+xgb_model2_path = "../new_data_training/xgboost_model2.pkl"
+rf_model2_path = "../new_data_training/random_forest_model2.pkl"
+svm_model2_path = "../new_data_training/svm_model2.pkl"
 
 # Load vectorizers and models
 vectorizer1 = load_vectorizer(vectorizer1_path)

@@ -118,7 +118,7 @@ def train_and_evaluate_new_data(new_data_path, save_dir):
     logging.info(f"Cleaned data saved to {cleaned_data_path}")"""
 
 
-    X_train, X_test, y_train, y_test, manual_check_df = prepare_data("C:/Users/wisbr/FakeNewsDetectionAI/trained_models/Cleaned_New_Data.csv")
+    X_train, X_test, y_train, y_test, manual_check_df = prepare_data("/trained_models/Cleaned_New_Data.csv")
     logging.info("New data preparation completed.")
 
     # Save manual check data
@@ -185,7 +185,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
     logging.info("Starting the training process...")
 
-    new_data_csv_path = r'C:\Users\wisbr\FakeNewsDetectionAI\data\new_dataset.csv'
+    new_data_csv_path = r'/data/new_dataset.csv'
     model_save_directory = r'C:\Users\wisbr\FakeNewsDetectionAI\trained_models'
 
     try:
