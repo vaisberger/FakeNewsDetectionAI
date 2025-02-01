@@ -86,6 +86,9 @@ def prepare_data(file_path):
     if 'title' in df.columns:
         df['text'] = df['title'] + ' ' + df['text']
 
+    # Invert label values (0 <-> 1)
+    df['label'] = df['label'].map({0: 1, 1: 0})
+
     # Split the data into features (X) and labels (y)
     manual_check_df = df.sample(frac=0.005, random_state=42)
     remaining_df = df.drop(manual_check_df.index)
@@ -97,8 +100,8 @@ def prepare_data(file_path):
     # Split the data into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
 
-    # Return data splits and the dataframe for manual checks
     return X_train, X_test, y_train, y_test, df
+
 
 # Integrate the prepare_data function into the script
 def train_and_evaluate_new_data(new_data_path, save_dir):
@@ -128,7 +131,7 @@ def train_and_evaluate_new_data(new_data_path, save_dir):
     logging.info(f"Manual check data saved to {manual_check_path}")
 
     # Vectorize the data
-    vectorizer = TfidfVectorizer(stop_words=stop_words)
+    vectorizer = TfidfVectorizer(max_features=100000, ngram_range=(1, 3), min_df=0.01)
     xv_train = vectorizer.fit_transform(X_train)  # Vectorize training data
     xv_test = vectorizer.transform(X_test)  # Vectorize testing data
 

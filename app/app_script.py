@@ -4,6 +4,8 @@ import xgboost as xgb
 import re
 import string
 import nltk
+import zipfile
+import os
 from nltk.stem import SnowballStemmer
 from scipy.special import expit
 
@@ -34,17 +36,22 @@ def clean_text(text):
     return ' '.join(stemmed_tokens)
 
 
-# Load model and vectorizer
+# Function to extract and load vectorizer from ZIP
+def load_vectorizer_from_zip(zip_path, filename):
+    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        zip_ref.extract(filename, "./extracted")  # Extract to a temp folder
+    return joblib.load(os.path.join("./extracted", filename))
+
+
+# Function to load model
 def load_model(model_path):
     return joblib.load(model_path)
 
 
-def load_vectorizer(vectorizer_path):
-    return joblib.load(vectorizer_path)
-
-
 # Paths to saved models and vectorizers
-vectorizer1_path = "../code/vectorizer1.pkl"
+vectorizer_zip_path = "../code/vectorizer1.zip"
+vectorizer1_filename = "vectorizer1.pkl"
+
 xgb_model1_path = "../code/xgboost_model1.pkl"
 rf_model1_path = "../code/random_forest_model1.pkl"
 svm_model1_path = "../code/svm_model1.pkl"
@@ -55,12 +62,12 @@ rf_model2_path = "../new_data_training/random_forest_model2.pkl"
 svm_model2_path = "../new_data_training/svm_model2.pkl"
 
 # Load vectorizers and models
-vectorizer1 = load_vectorizer(vectorizer1_path)
+vectorizer1 = load_vectorizer_from_zip(vectorizer_zip_path, vectorizer1_filename)
 xgb_model1 = load_model(xgb_model1_path)
 rf_model1 = load_model(rf_model1_path)
 svm_model1 = load_model(svm_model1_path)
 
-vectorizer2 = load_vectorizer(vectorizer2_path)
+vectorizer2 = joblib.load(vectorizer2_path)
 xgb_model2 = load_model(xgb_model2_path)
 rf_model2 = load_model(rf_model2_path)
 svm_model2 = load_model(svm_model2_path)
@@ -98,7 +105,7 @@ def check_news(text):
     # Define model accuracy (manually set based on your training results)
     accuracies = {
         "XGBoost": (1.00, 0.96),  # Model 1 = 1.00, Model 2 = 0.96
-        "Random Forest": (0.99, 0.89),
+        "Random Forest": (0.99, 0.92),
         "SVM": (0.99, 0.93)
     }
 
@@ -124,6 +131,7 @@ def check_news(text):
     print(f"Final Decision (Majority Vote): {majority_result}\n")
 
     return majority_result
+
 
 
 
