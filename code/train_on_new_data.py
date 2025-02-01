@@ -1,6 +1,4 @@
-import os
 import logging
-import pandas as pd
 from model_training import train_random_forest, train_xgboost, train_svm
 from sklearn.metrics import accuracy_score, classification_report
 import joblib
@@ -13,7 +11,6 @@ import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer  # Import vectorizer
 import pandas as pd
 from sklearn.model_selection import train_test_split
-import sys
 import os
 # Initialize NLTK components
 nltk.download('stopwords')
