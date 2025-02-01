@@ -131,7 +131,7 @@ def train_and_evaluate_new_data(new_data_path, save_dir):
     logging.info(f"Manual check data saved to {manual_check_path}")
 
     # Vectorize the data
-    vectorizer = TfidfVectorizer(max_features=100000, ngram_range=(1, 3), min_df=0.01)
+    vectorizer = TfidfVectorizer(stop_words=stop_words)
     xv_train = vectorizer.fit_transform(X_train)  # Vectorize training data
     xv_test = vectorizer.transform(X_test)  # Vectorize testing data
 
