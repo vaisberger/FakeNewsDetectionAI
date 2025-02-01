@@ -83,9 +83,9 @@ def main():
     Main function to load models, vectorizer, and perform manual testing.
     """
     # File paths
-    vectorizer2_path = "C:/Users/wisbr/FakeNewsDetectionAI/trained_models/vectorizer2.pkl"
-    xgb_model2_path = "C:/Users/wisbr/FakeNewsDetectionAI/trained_models/xgboost_model2.pkl"
-    rf_model2_path = "C:/Users/wisbr/FakeNewsDetectionAI/trained_models/random_forest_model2.pkl"
+    vectorizer2_path = "/new_data_training/vectorizer2.pkl"
+    xgb_model2_path = "/new_data_training/xgboost_model2.pkl"
+    rf_model2_path = "/new_data_training/random_forest_model2.pkl"
 
     # Load models
     rf_model = load_model( rf_model2_path)
@@ -99,7 +99,7 @@ def main():
         return
 
     # Load manual check data
-    manual_check_data = pd.read_csv(r'C:\Users\wisbr\FakeNewsDetectionAI\trained_models/Manual_Check_Data2.csv')
+    manual_check_data = pd.read_csv(r'/new_data_training/Manual_Check_Data2.csv')
 
     # Make predictions with Random Forest
     print("\nMaking predictions with Random Forest model...")

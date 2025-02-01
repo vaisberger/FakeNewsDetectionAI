@@ -2,13 +2,10 @@ import os
 import logging
 import joblib
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import tensorflow as tf
 from joblib import Parallel, delayed
 from xgboost import DMatrix
 from sklearn.metrics import accuracy_score, classification_report
-from data_ready_xg_rf import prepare_data
+from Tfidf_prepare import prepare_data
 from model_training import train_random_forest, train_xgboost, train_svm
 
 

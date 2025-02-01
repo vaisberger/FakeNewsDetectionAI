@@ -7,6 +7,7 @@ body {
     height: 100vh;
     margin: 0;
     color: #2d3436;
+    animation: fadeIn 1s ease-in-out;
 }
 .container {
     background-color: #ffffff;
@@ -59,4 +60,8 @@ p {
     margin-top: 20px;
     font-size: 1.2em;
     color: #2d3436;
+}
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
