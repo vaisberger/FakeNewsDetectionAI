@@ -105,7 +105,7 @@ def check_news(text):
     # Define model accuracy (manually set based on your training results)
     accuracies = {
         "XGBoost": (1.00, 0.96),  # Model 1 = 1.00, Model 2 = 0.96
-        "Random Forest": (0.99, 0.92),
+        "Random Forest": (0.99, 0.89),
         "SVM": (0.99, 0.93)
     }
 
