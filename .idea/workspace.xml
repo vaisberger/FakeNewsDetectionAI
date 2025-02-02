@@ -4,19 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db4072da-55c5-47c8-bdda-513924f8bf9c" name="Changes" comment="commit">
-      <change afterPath="$PROJECT_DIR$/data/Manual_Check_Data.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/new_dataset.csv" afterDir="false" />
+    <list default="true" id="db4072da-55c5-47c8-bdda-513924f8bf9c" name="Changes" comment="app ready">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app_script.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/manual_testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/manual_testing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/new_data_training/random_forest_model2.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/new_data_training/random_forest_model2.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/new_data_training/svm_model2.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new_data_training/train_on_new_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/train_on_new_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/new_data_training/vectorizer2.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new_data_training/xgboost_model2.pkl" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,12 +30,12 @@
     &quot;assignee&quot;: &quot;vaisberger&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/vaisberger/FakeNewsDetectionAI.git&quot;,
-    &quot;accountId&quot;: &quot;dfae4dde-b6b4-4d7e-9be1-182940780b82&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/vaisberger/FakeNewsDetectionAI.git",
+    "accountId": "3f6f8b8f-7d1d-46b7-b7e5-5b1f79f567d7"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -54,21 +45,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.app (1).executor": "Run",
-    "Python.app.executor": "Debug",
-    "Python.app_script (1).executor": "Run",
-    "Python.app_script.executor": "Run",
-    "Python.manual_testing.executor": "Run",
-    "Python.test_on_new_data.executor": "Run",
-    "Python.train_on_new_data.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/User/PycharmProjects/FakeNewsDetectionAI"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.app (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.app.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.app_script (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.app_script.executor&quot;: &quot;Run&quot;,
+    &quot;Python.manual_testing.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_on_new_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.train_on_new_data.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/PycharmProjects/FakeNewsDetectionAI&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\wisbr\FakeNewsDetectionAI" />
@@ -81,7 +72,7 @@
       <recent name="C:\Users\wisbr\FakeNewsDetectionAI\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.app (1)">
+  <component name="RunManager" selected="Python.manual_testing">
     <configuration name="app (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FakeNewsDetectionAI" />
       <option name="ENV_FILES" value="" />
@@ -148,7 +139,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="app_script" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="manual_testing" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FakeNewsDetectionAI" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -161,7 +152,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\wisbr\FakeNewsDetectionAI\app\app_script.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/code/manual_testing.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -194,11 +185,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.manual_testing" />
         <item itemvalue="Python.app (1)" />
         <item itemvalue="Python.train_on_new_data" />
         <item itemvalue="Python.app_script (1)" />
         <item itemvalue="Python.app" />
-        <item itemvalue="Python.app_script" />
       </list>
     </recent_temporary>
   </component>
@@ -274,7 +265,23 @@
       <option name="project" value="LOCAL" />
       <updated>1738262855452</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="commit">
+      <option name="closed" value="true" />
+      <created>1738488412298</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1738488412298</updated>
+    </task>
+    <task id="LOCAL-00009" summary="app ready">
+      <option name="closed" value="true" />
+      <created>1738494301273</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1738494301273</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -290,7 +297,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="models" />
+    <MESSAGE value="dont touch" />
     <MESSAGE value="commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit" />
+    <MESSAGE value="app ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="app ready" />
   </component>
 </project>
