@@ -1,3 +1,4 @@
+# this file is training the second set of data the same way as the first
 import logging
 from model_training import train_random_forest, train_xgboost, train_svm
 from sklearn.metrics import accuracy_score, classification_report
@@ -8,27 +9,23 @@ import string
 from nltk.corpus import stopwords
 from nltk.stem import SnowballStemmer
 import nltk
-from sklearn.feature_extraction.text import TfidfVectorizer  # Import vectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import os
-# Initialize NLTK components
+
 nltk.download('stopwords')
 nltk.download('punkt')
 
-# Correct stopwords definition
-stop_words = list(stopwords.words('english'))  # Convert the set to a list
+
+stop_words = list(stopwords.words('english'))
 stemmer = SnowballStemmer('english')
 
+
+# Cleans the input text
 def clean_text(text):
-    """
-    Cleans the input text by:
-    - Lowercasing
-    - Removing URLs, HTML tags, punctuation, numbers
-    - Tokenizing
-    - Removing stopwords
-    """
-    if pd.isnull(text):  # Handle NaN values
+
+    if pd.isnull(text):  # Handle null values
         return ""
 
     text = text.lower()   # Convert to lowercase
@@ -55,42 +52,20 @@ def clean_text(text):
 
     return ' '.join(stemmed_tokens)
 
+#    Prepares the data for model training by cleaning, handling missing values
+#    , and splitting into train/test sets.
 def prepare_data(file_path):
-    """
-    Prepares the data for model training by cleaning, handling missing values, and splitting into train/test sets.
-
-    Parameters:
-        file_path (str): Path to the cleaned CSV file.
-
-    Returns:
-        tuple: (X_train, X_test, y_train, y_test, manual_check_df)
-    """
 
     # Load the cleaned dataset
     df = pd.read_csv(file_path, encoding='ISO-8859-1')
 
-    # Define required columns
-    required_columns = ['text', 'label']
-
-    # Check if the 'title' column exists, and handle it if present
-    if 'title' in df.columns:
-        required_columns.append('title')
-
-    # Drop rows with missing values in the required columns
-    df = df.dropna(subset=required_columns)
-
-    # If the 'title' column exists, combine it with 'text'
-    if 'title' in df.columns:
-        df['text'] = df['title'] + ' ' + df['text']
-
-    # Invert label values (0 <-> 1)
+    # Invert label values (0 <-> 1) because the dataset was labeled the opposite
     df['label'] = df['label'].map({0: 1, 1: 0})
 
-    # Split the data into features (X) and labels (y)
+    # Split the data manual check and remaining
     manual_check_df = df.sample(frac=0.005, random_state=42)
     remaining_df = df.drop(manual_check_df.index)
 
-    # Extract features and labels
     x = remaining_df['text']
     y = remaining_df['label']
 
@@ -100,23 +75,16 @@ def prepare_data(file_path):
     return X_train, X_test, y_train, y_test, df
 
 
-# Integrate the prepare_data function into the script
+# Train models on new data and save them.
 def train_and_evaluate_new_data(new_data_path, save_dir):
-    """
-    Train models on new data and save them.
 
-    Parameters:
-        new_data_path (str): Path to the new dataset.
-        save_dir (str): Directory to save trained models and manual check data.
-    """
-    # Setup logging
-    """data = pd.read_csv(new_data_path, encoding="ISO-8859-1")
+    data = pd.read_csv(new_data_path, encoding="ISO-8859-1")
     data['text'] = data['text'].astype(str).apply(clean_text)
     logging.info("Data cleaning completed.")
 
     cleaned_data_path = os.path.join(save_dir, "Cleaned_New_Data.csv")
     data.to_csv(cleaned_data_path, index=False, encoding="ISO-8859-1")
-    logging.info(f"Cleaned data saved to {cleaned_data_path}")"""
+    logging.info(f"Cleaned data saved to {cleaned_data_path}")
 
 
     X_train, X_test, y_train, y_test, manual_check_df = prepare_data("C:/Users/wisbr/FakeNewsDetectionAI/new_data_training/Cleaned_New_Data.csv")

@@ -1,11 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for
+#Flask App Main Server
+from flask import Flask, render_template, request
 from app_script import check_news
 
 app = Flask(__name__)
 
 @app.route('/')
 def splash():
-    return render_template('welcome.html')  # splash page
+    return render_template('welcome.html')  # welcome page
 
 @app.route('/main', methods=['GET', 'POST'])
 def home():

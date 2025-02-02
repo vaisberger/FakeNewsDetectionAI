@@ -6,21 +6,16 @@ from nltk.stem import SnowballStemmer
 import nltk
 
 nltk.download('stopwords')
-nltk.download('punkt')  # Download punkt tokenizer
+nltk.download('punkt')
 nltk.data.clear_cache()
 
 # Initialize stopwords and lemmatizer
 stop_words = set(stopwords.words('english'))
 stemmer = SnowballStemmer('english')
 
+#Cleans the input text
 def clean_text(text):
-    """
-    Cleans the input text by:
-    - Lowercasing
-    - Removing URLs, HTML tags, punctuation, numbers
-    - Tokenizing
-    - Removing stopwords
-    """
+
     if pd.isnull(text):  # Handle NaN values
         return ""
 
@@ -48,7 +43,7 @@ def clean_text(text):
 
     return ' '.join(stemmed_tokens)
 
-# Path to the files
+
 true = pd.read_csv('C:/Users/wisbr/FakeNewsDetectionAI/data/true.csv')
 fake = pd.read_csv('C:/Users/wisbr/FakeNewsDetectionAI/data/fake.csv')
 

@@ -1,21 +1,12 @@
+# prepares the first set of data
 import pandas as pd
-import numpy as np
 import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 
-
-def prepare_data(file_path, test_size=0.25, random_state=42, max_features=100000, ngram_range=(1, 3), min_df=0.01):
-    """
-    Process the dataset, shuffle it, and return TF-IDF vectors for training and testing.
-
-    Returns:
-        xv_train (sparse matrix): TF-IDF vectorized training data.
-        xv_test (sparse matrix): TF-IDF vectorized testing data.
-        y_train (Series): Training labels.
-        y_test (Series): Testing labels.
-        manual_check_df (DataFrame): Subset of data for manual review.
-    """
+#Process the dataset, shuffle it, and return TF-IDF vectors for training and testing.
+def prepare_data(file_path, test_size=0.25, random_state=42, max_features=100000
+                 , ngram_range=(1, 3), min_df=0.01):
 
     # Load dataset
     cleaned_df = pd.read_csv(file_path)
@@ -27,18 +18,17 @@ def prepare_data(file_path, test_size=0.25, random_state=42, max_features=100000
         (cleaned_df['title'].str.strip() != '')
     ]
 
-    # 🔀 Shuffle the dataset before splitting
+    # Shuffle the dataset before splitting
     cleaned_df = cleaned_df.sample(frac=1, random_state=random_state).reset_index(drop=True)
 
     # Split data into manual check and remaining data
     manual_check_df = cleaned_df.sample(frac=0.005, random_state=random_state)
     remaining_df = cleaned_df.drop(manual_check_df.index)
 
-    # Extract features and labels
     x = remaining_df['text']
     y = remaining_df['label']
 
-    # Split remaining data into training and testing sets
+    # Split data into training and testing sets
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=random_state)
 
     # Create and fit TF-IDF vectorizer

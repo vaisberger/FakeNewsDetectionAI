@@ -38,7 +38,7 @@ body {
 }
 
 .progress-bar-container {
-    width: 20%;  /* Make it take the full width */
+    width: 20%;
     height: 10px;
     background-color: #ddd;
     border-radius: 5px;
@@ -53,7 +53,6 @@ body {
     transition: width 0.1s ease-in-out;
 }
 
-/* Adjust textarea and button styling to fit better with background */
 textarea {
     width: 90%;
     height: 225px;

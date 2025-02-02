@@ -9,12 +9,10 @@ import os
 from nltk.stem import SnowballStemmer
 from scipy.special import expit
 
-# Download necessary NLTK resources
 nltk.download('punkt')
 
 # Initialize stemmer
 stemmer = SnowballStemmer("english")
-
 
 # Function to clean the text
 def clean_text(text):
@@ -91,7 +89,7 @@ def predict_with_model(model, vectorizer, text):
     return probability
 
 
-# Function to return averaged model prediction
+# Function to return averaged model prediction for each algorithm
 def check_news(text):
     model_predictions = {
         "XGBoost": (predict_with_model(xgb_model1, vectorizer1, text),
@@ -104,14 +102,14 @@ def check_news(text):
 
     # Define model accuracy (manually set based on your training results)
     accuracies = {
-        "XGBoost": (1.00, 0.96),  # Model 1 = 1.00, Model 2 = 0.96
+        "XGBoost": (1.00, 0.96),
         "Random Forest": (0.99, 0.89),
         "SVM": (0.99, 0.93)
     }
 
     final_results = {}
 
-    print("\n--- MODEL PREDICTIONS ---")  # Debugging line
+    print("\n--- MODEL PREDICTIONS ---")
 
     for algo, (prob1, prob2) in model_predictions.items():
         acc1, acc2 = accuracies[algo]
@@ -121,7 +119,6 @@ def check_news(text):
         final_prediction = "TRUE" if final_probability >= 0.5 else "FAKE"
         final_results[algo] = (final_prediction, round(final_probability, 2))
 
-        # Debugging output
         print(f"{algo}: Prob1={round(prob1, 2)}, Prob2={round(prob2, 2)}, Weighted Final={final_prediction}")
 
     # Majority voting: If 2 or more models predict TRUE, return TRUE; otherwise, FAKE

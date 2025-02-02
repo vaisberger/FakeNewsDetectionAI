@@ -1,3 +1,4 @@
+#Model Training and Evaluation Pipeline for the first dataset we trained
 import os
 import logging
 import joblib
@@ -9,10 +10,8 @@ from Tfidf_prepare import prepare_data
 from model_training import train_random_forest, train_xgboost, train_svm
 
 
+#Handle prediction for XGBoost and other models.
 def parallel_predict(model, X_test, model_name):
-    """
-    Handle prediction for XGBoost and other models.
-    """
     if model_name == "XGBoost":
         return model.predict(DMatrix(X_test))  # XGBoost uses DMatrix for prediction
     else:
@@ -21,10 +20,9 @@ def parallel_predict(model, X_test, model_name):
         return np.concatenate(predictions)  # Flatten results
 
 
+#Evaluate the given model and log metrics.
 def evaluate_model(model, X_test, y_test, model_name):
-    """
-    Evaluate the given model and log metrics.
-    """
+
     y_pred = parallel_predict(model, X_test, model_name)
     y_pred = np.ravel(y_pred)
 
@@ -40,24 +38,22 @@ def evaluate_model(model, X_test, y_test, model_name):
     logging.info(f"{model_name} Classification Report:\n{classification_report(y_test, y_pred)}")
 
 
+#Main pipeline for data preparation, model training, and evaluation.
 def main():
-    """
-    Main pipeline for data preparation, model training, and evaluation.
-    """
+
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-    # File paths
-    zip_path = r"C:\Users\wisbr\FakeNewsDetectionAI\data\Cleaned_Dataset.csv"
+    cvs_path = r"C:\Users\wisbr\FakeNewsDetectionAI\data\Cleaned_Dataset.csv"
 
-    if not os.path.exists(zip_path):
-        raise FileNotFoundError(f"File not found at {zip_path}")
+    if not os.path.exists(cvs_path):
+        raise FileNotFoundError(f"File not found at {cvs_path}")
 
     # Data preparation
     logging.info("Preparing data...")
-    X_train, X_test, y_train, y_test, manual_check_df = prepare_data(zip_path)
+    X_train, X_test, y_train, y_test, manual_check_df = prepare_data(cvs_path)
     logging.info("Data preparation completed.")
 
-    # Save manual check data
+    # Save manual check data for later
     manual_check_path = r"C:\Users\wisbr\FakeNewsDetectionAI\data\Manual_Check_Data.csv"
     manual_check_df[['text', 'label']].to_csv(manual_check_path, index=False)
     logging.info(f"Manual check data saved to {manual_check_path}")
@@ -80,7 +76,6 @@ def main():
     logging.info("Evaluating XGBoost...")
     evaluate_model(xgb_model, X_test, y_test, "XGBoost")
 
-    # Evaluate SVM
     logging.info("Evaluating SVM...")
     evaluate_model(svm_model, X_test_scaled, y_test, "SVM")
 
